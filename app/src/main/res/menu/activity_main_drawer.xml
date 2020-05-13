@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_salud"
+            android:icon="@drawable/ic_local_hospital_black_24dp"
+            android:title="@string/menu_salud" />
+        <item
+            android:id="@+id/nav_aviso"
+            android:icon="@drawable/ic_warning_black_24dp"
+            android:title="@string/menu_aviso" />
+        <item
+            android:id="@+id/nav_petshop"
+            android:icon="@drawable/ic_shopping_cart_black_24dp"
+            android:title="@string/menu_petshop" />
+
+
+
+    </group>
+</menu>
