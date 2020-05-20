@@ -17,6 +17,10 @@
             android:id="@+id/nav_petshop"
             android:icon="@drawable/ic_shopping_cart_black_24dp"
             android:title="@string/menu_petshop" />
+        <item
+            android:id="@+id/nav_inicioSesion"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="@string/menu_inicio_sesion" />
 
 
 
