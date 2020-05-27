@@ -2,17 +2,18 @@ package com.example.desamparados;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.view.Menu;
 
+import com.example.desamparados.Activity.CrearAviso;
+
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.core.view.GravityCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -21,40 +22,41 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements  View.OnClickListener{
 
     private AppBarConfiguration mAppBarConfiguration;
-    private FloatingActionButton boton;
+    private  FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //TOOLBAR
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //BOTON FLOTANTE
-        boton=(FloatingActionButton)findViewById(R.id.fab);
-        boton.setOnClickListener(this);
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(this);
 
-        //MENU DESPLEGABLE
+        //NAVIGATION DRAWER
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_aviso, R.id.nav_salud, R.id.nav_petshop, R.id.nav_inicioSesion)
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-       // getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -65,25 +67,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 || super.onSupportNavigateUp();
     }
 
-    //PARA UTILIZAR EL BOTON FLOTANTE
-    public void ShowDialog(){
-        FragmentManager fragmentManager = getSupportFragmentManager ();
-        CrearAviso newFragment = new CrearAviso ();
-        FragmentTransaction transacción = fragmentManager.beginTransaction ();
-        // Para un poco de pulido, especifique una animación de transición
-        transacción.setTransition (FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        // Para que sea de pantalla completa, use la vista raíz 'contenido' como contenedor
-        // para el fragmento, que siempre es la vista raíz de la actividad
-        transacción.add (android.R.id.content, newFragment).addToBackStack (null) .commit ();
+    //ABRIR EL ACTIVITY PARA CREAR UNA NUEVA PUBLICACION
+    public void CrearAviso(View v){
+        Intent i =new Intent(this, CrearAviso.class);
+        startActivity(i);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.fab:
-                ShowDialog();
-                break;
+        int id = v.getId();
+        if (id == fab.getId()){
+
+            CrearAviso(v);
         }
     }
-}
 
+}

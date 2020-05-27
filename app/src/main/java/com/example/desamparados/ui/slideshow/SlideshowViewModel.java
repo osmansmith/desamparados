@@ -1,14 +1,16 @@
-package com.example.desamparados;
+package com.example.desamparados.ui.slideshow;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class PetshopViewModel extends ViewModel {
+public class SlideshowViewModel extends ViewModel {
+
     private MutableLiveData<String> mText;
-    public PetshopViewModel() {
+
+    public SlideshowViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Esta es la vista de petshop");
+        mText.setValue("This is slideshow fragment");
     }
 
     public LiveData<String> getText() {
