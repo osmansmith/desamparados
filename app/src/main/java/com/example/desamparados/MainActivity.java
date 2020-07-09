@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        // Este menu esta al lado derecho en la barra
+        //getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
