@@ -17,7 +17,10 @@
     <!--NOMBRES EN EL ACTIVITY AVISOS-->
     <string name="Guardar">Guardar</string>
     <string name="DatosMascota">Datos de la Mascota</string>
-    <string name="NombreMascota">Nombre Mascota</string>
+    <string name="NombreMascota">Nombre o apodo</string>
+    <string name="sector">Sector</string>
+    <string name="location">Dirrección apromaximada</string>
+
 
     <!--NOMBRES DE LIST_AVISOS-->
 
@@ -29,6 +32,13 @@
 
     <!-- Nombre de lista de tiendas-->
     <string name="nombre_tienda">nombre de una tienda</string>
-    <string name="descripcion_img" >Descripción de una imagen.</string>
-    <string name="descripcion_tienda" >Descripción de una tienda.</string>
+    <string name="descripcion_img">Descripción de una imagen.</string>
+    <string name="descripcion_tienda">Descripción de una tienda.</string>
+    <string name="title_activity_maps">Map</string>
+
+
+    <!-- latitude and logitud description at top screen -->
+    <string name="detail_lat_lon">(%1$,2f ,%2$,2f)</string>
+    <string name="title_activity_map2">Map</string>
+    <string name="title_activity_map3">Map</string>
 </resources>

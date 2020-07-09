@@ -71,7 +71,9 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     public void CrearAviso(View v){
         Intent i =new Intent(this, CrearAviso.class);
         startActivity(i);
-    }
+
+
+}
 
     @Override
     public void onClick(View v) {
