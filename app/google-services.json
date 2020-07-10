@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "592973336228",
-    "firebase_url": "https://desamparados-4e547.firebaseio.com",
-    "project_id": "desamparados-4e547",
-    "storage_bucket": "desamparados-4e547.appspot.com"
+    "project_number": "13939346060",
+    "firebase_url": "https://desamparados-7e37d.firebaseio.com",
+    "project_id": "desamparados-7e37d",
+    "storage_bucket": "desamparados-7e37d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:592973336228:android:8dfb332e9adda5d7aee031",
+        "mobilesdk_app_id": "1:13939346060:android:9db30cfecb9df6d6c649a9",
         "android_client_info": {
           "package_name": "com.example.desamparados"
         }
       },
       "oauth_client": [
         {
-          "client_id": "592973336228-rljsie69rbv5k0pjqs60o7f6o7l4ecoq.apps.googleusercontent.com",
+          "client_id": "13939346060-qo2g84nqo1j18a19m9k6p6bmb14rq91q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.desamparados",
+            "certificate_hash": "13a9f59a2bd914590d8123be1d24be24c4b69ebd"
+          }
+        },
+        {
+          "client_id": "13939346060-l8fhraolq5j7ta608ea1nug8gq9d2qbe.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCOlb4U-yQ742J9hm7_z5iSWMrM-JyTjDg"
+          "current_key": "AIzaSyD4AW79Cbf5wtskSmHZwvDisx3E5Vrb7pA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "592973336228-rljsie69rbv5k0pjqs60o7f6o7l4ecoq.apps.googleusercontent.com",
+              "client_id": "13939346060-l8fhraolq5j7ta608ea1nug8gq9d2qbe.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
