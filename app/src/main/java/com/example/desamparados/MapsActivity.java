@@ -65,8 +65,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (location != null) {
             CrearAviso.latitude = location.getLatitude();
             CrearAviso.longitude = location.getLongitude();
-            CrearAviso.p_latitude.setText(String.valueOf(location.getLatitude()));
-            CrearAviso.p_longitude.setText(String.valueOf(location.getLongitude()));
+            CrearAviso.latitud.setText(String.valueOf(location.getLatitude()));
+            CrearAviso.longitud.setText(String.valueOf(location.getLongitude()));
     }}
 
     //cambia la ubicación si se va moviendo
@@ -125,7 +125,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Address DirCalle = list.get(0);
                 String address = DirCalle.getAddressLine(0);
                 Toast.makeText(this," Dirección: " + address, Toast.LENGTH_LONG).show();
-                CrearAviso.p_address.setText(address);
+                CrearAviso.direccion.setText(address);
 
             }
         }

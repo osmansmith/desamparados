@@ -4,6 +4,9 @@ public class TipoMascota {
     private int id;
     private String nombre;
 
+    public TipoMascota() {
+    }
+
     public TipoMascota(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
@@ -23,5 +26,10 @@ public class TipoMascota {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+        return this.nombre;
     }
 }

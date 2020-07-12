@@ -4,6 +4,9 @@ public class TipoAviso {
     private int id;
     private String nombre;
 
+    public TipoAviso() {
+    }
+
     public TipoAviso(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
@@ -23,5 +26,10 @@ public class TipoAviso {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+        return this.nombre;
     }
 }

@@ -10,7 +10,13 @@ public class Aviso {
     private TipoAviso tipoAviso; //ES DE TIPO ENTERO POR QUE SE LE SACA EL ID QUE RESIBE EN LA CARPETA DRAWABLE
     private TipoMascota tipoMascota;
     private int estado; // 0 = eliminado - 1 = activo
+    private double latitud;
+    private double longitud;
+    private String direccion;
 
+
+    public Aviso() {
+    }
 
     public Aviso(String id, String nombre, String descripcion, int imagen, TipoAviso tipoAviso, TipoMascota tipoMascota, int estado) {
         this.id = id;
@@ -20,6 +26,7 @@ public class Aviso {
         this.tipoAviso = tipoAviso;
         this.tipoMascota = tipoMascota;
         this.estado = estado;
+
     }
 
     public Aviso(String nombre, String descripcion, int imagen){
@@ -83,5 +90,29 @@ public class Aviso {
 
     public void setTipoAviso(TipoAviso tipoAviso) {
         this.tipoAviso = tipoAviso;
+    }
+
+    public double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
+    }
+
+    public double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 }

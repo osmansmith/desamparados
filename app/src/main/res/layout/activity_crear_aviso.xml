@@ -113,12 +113,11 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <EditText
-                            android:id="@+id/pet_name"
+                            android:id="@+id/nombre"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
                             android:inputType="textPersonName" />
-
 
                         <TextView
                             android:layout_width="match_parent"
@@ -129,14 +128,14 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <EditText
-                            android:id="@+id/pet_description"
+                            android:id="@+id/descripcion"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10" />
 
 
                         <EditText
-                            android:id="@+id/p_latitude"
+                            android:id="@+id/latitud"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:digits="1234567890."
@@ -144,35 +143,59 @@
                             android:hint="Latitud"
                             android:inputType="numberDecimal"
                             android:textColor="#727272" />
-
                         <EditText
-                            android:id="@+id/p_longitude"
-
+                            android:id="@+id/longitud"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-
                             android:digits="1234567890."
                             android:ems="10"
                             android:hint="Longitud"
-
                             android:inputType="numberDecimal"
                             android:textColor="#727272" />
 
-                        <EditText
-                            android:id="@+id/p_address"
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Dirección"
-                            android:textColor="#727272" />
+                            android:layout_height="wrap_content">
+
+                                <EditText
+                                    android:id="@+id/direccion"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_toLeftOf="@+id/boton_mapa"
+                                    android:hint="Dirección"
+                                    android:textColor="#727272" />
+
+                                <Button
+
+                                    android:id="@+id/boton_mapa"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:drawableBottom="@drawable/ic_location_on_24"
+                                    android:textColor="@color/colorPrimary"
+
+                                    />
+
+                        </RelativeLayout>
+
+                        <Spinner
+                            android:id="@+id/spinner_tipo_mascota"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
+
+                        <Spinner
+                            android:id="@+id/spinner_tipo_aviso"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp" />
 
                         <Button
 
-                            android:id="@+id/btn_map"
+                            android:id="@+id/boton_crear_aviso"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Buscar en el mapa"
+                            android:text="Publicar"
                             android:textColor="@color/colorPrimary" />
-
 
                 </LinearLayout>
 

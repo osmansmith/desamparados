@@ -16,13 +16,23 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
+
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.desamparados.Clases.Aviso;
+import com.example.desamparados.Clases.TipoAviso;
+import com.example.desamparados.Clases.TipoMascota;
+import com.example.desamparados.FireBase.AvisoFirebase;
+import com.example.desamparados.FireBase.TipoAvisoFirebase;
+import com.example.desamparados.FireBase.TipoMascotaFirebase;
+import com.example.desamparados.MainActivity;
 import com.example.desamparados.MapsActivity;
 import com.example.desamparados.R;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,13 +43,17 @@ import java.util.Date;
 public class CrearAviso extends AppCompatActivity implements View.OnClickListener {
     public static double latitude;
     public static double longitude;
-    public static EditText p_latitude;
-    public static EditText p_longitude;
-    public static EditText p_address;
-    Button btn_img;
-    Button btn_map;
+    EditText nombre;
+    EditText descripcion;
     ImageView img;
-
+    Spinner spinner_tipo_aviso;
+    Spinner spinner_tipo_mascota;
+    Button boton_crear_aviso;
+    public static EditText latitud;
+    public static EditText longitud;
+    public static EditText direccion;
+    Button btn_img;
+    Button boton_mapa;
 
     public static final int REQUEST_CODE_TAKE_PHOTO = 0 /*1*/;
     private Uri photoURI;
@@ -50,15 +64,23 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_aviso);
-        p_latitude=(EditText) findViewById(R.id.p_latitude);
-        p_longitude=(EditText) findViewById(R.id.p_longitude);
-        p_address=(EditText) findViewById(R.id.p_address);
-        btn_map = (Button) findViewById(R.id.btn_map) ;
-        btn_map.setOnClickListener(this);
+        nombre=(EditText) findViewById(R.id.nombre);
+        descripcion=(EditText) findViewById(R.id.descripcion);
+        latitud=(EditText) findViewById(R.id.latitud);
+        longitud=(EditText) findViewById(R.id.longitud);
+        direccion=(EditText) findViewById(R.id.direccion);
+        boton_mapa = (Button) findViewById(R.id.boton_mapa) ;
+        boton_mapa.setOnClickListener(this);
         btn_img = (Button) findViewById(R.id.btn_img);
         btn_img.setOnClickListener(this);
+        boton_crear_aviso = (Button) findViewById(R.id.boton_crear_aviso);
+        boton_crear_aviso.setOnClickListener(this);
         img = (ImageView) findViewById(R.id.img);
+        spinner_tipo_aviso = (Spinner) findViewById(R.id.spinner_tipo_aviso);
+        spinner_tipo_mascota = (Spinner) findViewById(R.id.spinner_tipo_mascota);
 
+        llenarSpinnerTipoAviso();
+        llenarSpinnerTipoMascota();
     }
 
 
@@ -68,9 +90,12 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
             case R.id.btn_img:
                 showOptions();
                 break;
-            case R.id.btn_map:
+            case R.id.boton_mapa:
                 Intent i = new Intent(getApplicationContext(), MapsActivity.class);
                 startActivity(i);
+                break;
+            case R.id.boton_crear_aviso:
+                this.crearAviso();
                 break;
         }
     }
@@ -130,8 +155,6 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
 
 
     public void openCamera() {
-
-
             if (ContextCompat.checkSelfPermission(getApplicationContext(),
                     Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this,
@@ -161,7 +184,7 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
                 dispatchTakePictureIntent();
             }
 
-        }
+    }
 
 
 
@@ -217,4 +240,44 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
     }
 
 
+
+    public void llenarSpinnerTipoAviso() {
+        TipoAvisoFirebase f = new TipoAvisoFirebase();
+        f.getTipoAvisos(getApplicationContext(),spinner_tipo_aviso);
+    }
+
+    public void llenarSpinnerTipoMascota(){
+        TipoMascotaFirebase f = new TipoMascotaFirebase();
+        f.getTipoMascotas(getApplicationContext(),spinner_tipo_mascota);
+    }
+
+    public void crearAviso(){
+        Aviso aviso = new Aviso();
+        aviso.setNombre(this.nombre.getText().toString().trim());
+        aviso.setDescripcion(this.descripcion.getText().toString().trim());
+        aviso.setLatitud(Double.parseDouble(this.latitud.getText().toString().trim()));
+        aviso.setLongitud(Double.parseDouble(this.longitud.getText().toString().trim()));
+        aviso.setEstado(1);
+        aviso.setDireccion(this.direccion.getText().toString());
+        aviso.setTipoAviso((TipoAviso) spinner_tipo_aviso.getSelectedItem());
+        aviso.setTipoMascota((TipoMascota) spinner_tipo_mascota.getSelectedItem());
+        AvisoFirebase avisoFirebase = new AvisoFirebase();
+        if(avisoFirebase.insertarAviso(aviso)){
+            Toast.makeText(this, "Aviso Creado!",Toast.LENGTH_LONG).show();
+            Intent i =new Intent(this, MainActivity.class);
+            startActivity(i);
+
+        }
+        else{
+            Toast.makeText(this, "Aviso no pudo ser ingresado :c",Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+
+
+
 }
+
+
+

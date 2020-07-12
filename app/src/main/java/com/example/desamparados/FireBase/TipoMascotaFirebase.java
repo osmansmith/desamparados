@@ -33,7 +33,7 @@ public class TipoMascotaFirebase {
 
 
     /**
-     * @param context contexto de la actividad o fragment en la que se cargará la información
+     * * @param context contexto de la actividad o fragment en la que se cargará la información
     * @param spinner elemento en donde se carga la información
     * @return ArrayList<TipoMascota> con todos los tipos de mascotas desde firebase
     */
