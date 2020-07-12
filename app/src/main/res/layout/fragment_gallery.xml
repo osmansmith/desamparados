@@ -9,9 +9,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:scrollbars="vertical"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
-        tools:listitem="@layout/list_avisos"/>
+        android:scrollbars="vertical"
+        tools:listitem="@layout/list_avisos" />
 
 </LinearLayout>

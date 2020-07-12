@@ -46,9 +46,10 @@ public class GalleryFragment extends Fragment {
                 R.drawable.mascogar));
     }
     public void MostraLista(){
-        LinearLayoutManager layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false);
-        adaptadorTiendas =new AdaptadorTiendas(getContext(),listaTiendas);
 
+        LinearLayoutManager layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false);
+
+        adaptadorTiendas =new AdaptadorTiendas(getContext(),listaTiendas);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adaptadorTiendas);
     }

@@ -47,7 +47,7 @@ public class AdapterAvisos extends RecyclerView.Adapter<AdapterAvisos.ViewHolder
 
     @Override
     public int getItemCount() {
-        //TOMA EL TAMAÑO DE LA LISTA listaAvisos
+        //TOMA EL TAMAÑO DE LA LISTA
         return listaAvisos.size();
     }
     //PARA HACER CLICK
@@ -62,7 +62,7 @@ public class AdapterAvisos extends RecyclerView.Adapter<AdapterAvisos.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        //HACE REFERENCIA A LO UTILIZADO EN EL LAYOUT LIST_AVISO
+        //HACE REFERENCIA A LO UTILIZADO EN EL LAYOUT
         ImageView imagen;
         TextView nombre, Descripcion;
 
