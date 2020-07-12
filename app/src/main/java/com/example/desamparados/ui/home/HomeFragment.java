@@ -18,11 +18,11 @@ import com.example.desamparados.R;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
-
-    AdapterAvisos adaptadorAviso;
+    private AdapterAvisos adaptadorAviso;
     private RecyclerView recyclerView;
     private ArrayList<Aviso>listaAvisos;
 
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -30,13 +30,16 @@ public class HomeFragment extends Fragment {
 
         recyclerView=(RecyclerView) vista.findViewById(R.id.recyclerview);
         listaAvisos=new ArrayList<>();
+
         AñadirDatos();//INGRESA OBJETOS A LA LISTA
         MostraLista();//MUESTRA LOS OBJETOD DE LA LISTA
-
         return vista;
+
     }
     //iNGRESA LOS DATOS A LA LISTA
     public void AñadirDatos(){
+
+
             listaAvisos.add(new Aviso("Chocolate","Manchas cafes es muy amistoso y recien tiene 4 meses",
                     R.drawable.descarga ));
             listaAvisos.add(new Aviso("Silvestre","Gato Gris de 3 años tiene un collar azul",

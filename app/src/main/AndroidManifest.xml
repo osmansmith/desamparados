@@ -13,8 +13,9 @@
             android:name=".Activity.CrearAviso"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <!--ESTO ES PARA QUE NO APARESCA EL NOMBRE DE LA APP-->
-            </activity>
+
+            <!-- ESTO ES PARA QUE NO APARESCA EL NOMBRE DE LA APP -->
+        </activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

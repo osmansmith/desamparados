@@ -25,5 +25,10 @@
     <string name="Descripción">Descripción</string>
     <string name="open">open</string>
     <string name="close">close</string>
+    <string name="todo" />
 
+    <!-- Nombre de lista de tiendas-->
+    <string name="nombre_tienda">nombre de una tienda</string>
+    <string name="descripcion_img" >Descripción de una imagen.</string>
+    <string name="descripcion_tienda" >Descripción de una tienda.</string>
 </resources>

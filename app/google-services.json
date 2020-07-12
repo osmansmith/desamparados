@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "592973336228",
+    "firebase_url": "https://desamparados-4e547.firebaseio.com",
+    "project_id": "desamparados-4e547",
+    "storage_bucket": "desamparados-4e547.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592973336228:android:8dfb332e9adda5d7aee031",
+        "android_client_info": {
+          "package_name": "com.example.desamparados"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "592973336228-rljsie69rbv5k0pjqs60o7f6o7l4ecoq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOlb4U-yQ742J9hm7_z5iSWMrM-JyTjDg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "592973336228-rljsie69rbv5k0pjqs60o7f6o7l4ecoq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
