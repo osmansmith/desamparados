@@ -13,6 +13,7 @@ public class Aviso {
     private double latitud;
     private double longitud;
     private String direccion;
+    private String image_firebase;
 
 
     public Aviso() {
@@ -114,5 +115,13 @@ public class Aviso {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public String getImage_firebase() {
+        return image_firebase;
+    }
+
+    public void setImage_firebase(String image_firebase) {
+        this.image_firebase = image_firebase;
     }
 }

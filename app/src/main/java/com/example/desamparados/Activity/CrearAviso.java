@@ -6,11 +6,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -32,13 +34,20 @@ import com.example.desamparados.FireBase.TipoMascotaFirebase;
 import com.example.desamparados.MainActivity;
 import com.example.desamparados.MapsActivity;
 import com.example.desamparados.R;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import id.zelory.compressor.Compressor;
 
 public class CrearAviso extends AppCompatActivity implements View.OnClickListener {
     public static double latitude;
@@ -59,6 +68,7 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
     private Uri photoURI;
     public String mCurrentPhotoPath;
     Bitmap bitmap;
+    byte[] thumb_byte = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +99,7 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
         switch (v.getId()){
             case R.id.btn_img:
                 showOptions();
+                //CropImage.startPickImageActivity(CrearAviso.this);
                 break;
             case R.id.boton_mapa:
                 Intent i = new Intent(getApplicationContext(), MapsActivity.class);
@@ -206,6 +217,7 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
 
         // Save a file: path for use with ACTION_VIEW intents
         mCurrentPhotoPath= image.getAbsolutePath();
+
         return image;
     }
 
@@ -235,9 +247,75 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
                 e.printStackTrace();
             }
             img.setImageBitmap(bitmap);
+            //comprimiendo imagen
+            /*try {
+                File url = new File(photoURI.getPath());
+                Bitmap bitmap;
+                bitmap = new Compressor(this)
+                        .setMaxHeight(640)
+                        .setMaxWidth(480)
+                        .setQuality(480)
+                        .compressToBitmap(url);
+
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG,90,byteArrayOutputStream);
+                thumb_byte = byteArrayOutputStream.toByteArray();
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }*/
+
+
+
 
         }
+       /* if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            Uri imageUri = CropImage.getPickImageResultUri(this, data);
+
+            //recortar imagen
+
+            CropImage.activity(imageUri)
+                    .setGuidelines(CropImageView.Guidelines.ON)
+                    .setRequestedSize(640, 480)
+                    .setAspectRatio(2, 1).start(this);
+        }
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+
+            if(resultCode == RESULT_OK) {
+                Uri resultUri = result.getUri();
+                File url = new File(resultUri.getPath());
+                //mostrando imagen
+                //Picasso.get().load(resultUri).into(img);
+
+
+                //comprimiendo imagen
+                try {
+                    Bitmap bitmap;
+                    bitmap = new Compressor(this)
+                            .setMaxHeight(640)
+                            .setMaxWidth(480)
+                            .setQuality(480)
+                            .compressToBitmap(url);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG,90,byteArrayOutputStream);
+                thumb_byte = byteArrayOutputStream.toByteArray();
+
+                }
+        } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+            System.out.println("error en la imagen");
+        }*/
+
     }
+
+
+
 
 
 
@@ -252,6 +330,9 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
     }
 
     public void crearAviso(){
+        File url = new File(photoURI.getPath());
+
+
         Aviso aviso = new Aviso();
         aviso.setNombre(this.nombre.getText().toString().trim());
         aviso.setDescripcion(this.descripcion.getText().toString().trim());
@@ -262,7 +343,7 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
         aviso.setTipoAviso((TipoAviso) spinner_tipo_aviso.getSelectedItem());
         aviso.setTipoMascota((TipoMascota) spinner_tipo_mascota.getSelectedItem());
         AvisoFirebase avisoFirebase = new AvisoFirebase();
-        if(avisoFirebase.insertarAviso(aviso)){
+        if(avisoFirebase.insertarAviso(aviso,thumb_byte)){
             Toast.makeText(this, "Aviso Creado!",Toast.LENGTH_LONG).show();
             Intent i =new Intent(this, MainActivity.class);
             startActivity(i);
