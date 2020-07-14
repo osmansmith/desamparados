@@ -41,4 +41,14 @@
     <string name="detail_lat_lon">(%1$,2f ,%2$,2f)</string>
     <string name="title_activity_map2">Map</string>
     <string name="title_activity_map3">Map</string>
+
+    <!-- Nombres de Inicio de sesion -->
+    <string name="email">Email</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="iniciarSesion">Inicar Sesion</string>
+    <string name="registrar">Registrar</string>
+    <!-- Nombres de registro -->
+    <string name="usuario">Nombre</string>
+    <string name="Telefono">Celular</string>
+    <string name="contraseña2">Repetir contraseña</string>
 </resources>
