@@ -10,10 +10,18 @@
       "client_info": {
         "mobilesdk_app_id": "1:592973336228:android:8dfb332e9adda5d7aee031",
         "android_client_info": {
-          "package_name": "com.example.desamparados"
+          "package_name": "com.desam.desamparados"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "592973336228-skdv1dlqfcr5cd7h63tk145uv3spp4ov.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.desam.desamparados",
+            "certificate_hash": "13a9f59a2bd914590d8123be1d24be24c4b69ebd"
+          }
+        },
         {
           "client_id": "592973336228-rljsie69rbv5k0pjqs60o7f6o7l4ecoq.apps.googleusercontent.com",
           "client_type": 3
@@ -21,7 +29,50 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCOlb4U-yQ742J9hm7_z5iSWMrM-JyTjDg"
+          "current_key": "AIzaSyBVVSzAtRHYVXVwJJd6xXFsDMWYKc87zwg"
+        },
+        {
+          "current_key": "AIzaSyCWbfdY34ydOjH93Y-JWsKBcukCn0bTk3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "592973336228-rljsie69rbv5k0pjqs60o7f6o7l4ecoq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:592973336228:android:87fe8a9cfebd3ea0aee031",
+        "android_client_info": {
+          "package_name": "com.example.desamparados"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "592973336228-t7t9v3dsup6snu6vl6cjl40vsu5udi31.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.desamparados",
+            "certificate_hash": "13a9f59a2bd914590d8123be1d24be24c4b69ebd"
+          }
+        },
+        {
+          "client_id": "592973336228-rljsie69rbv5k0pjqs60o7f6o7l4ecoq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVVSzAtRHYVXVwJJd6xXFsDMWYKc87zwg"
+        },
+        {
+          "current_key": "AIzaSyCWbfdY34ydOjH93Y-JWsKBcukCn0bTk3k"
         }
       ],
       "services": {
