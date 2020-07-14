@@ -1,5 +1,6 @@
 package com.example.desamparados.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -34,7 +35,14 @@ import com.example.desamparados.FireBase.TipoMascotaFirebase;
 import com.example.desamparados.MainActivity;
 import com.example.desamparados.MapsActivity;
 import com.example.desamparados.R;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -46,6 +54,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 import id.zelory.compressor.Compressor;
 
@@ -63,6 +72,8 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
     public static EditText direccion;
     Button btn_img;
     Button boton_mapa;
+    DatabaseReference imgref;
+    StorageReference storageReference;
 
     public static final int REQUEST_CODE_TAKE_PHOTO = 0 /*1*/;
     private Uri photoURI;
@@ -91,6 +102,9 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
 
         llenarSpinnerTipoAviso();
         llenarSpinnerTipoMascota();
+
+        imgref = FirebaseDatabase.getInstance().getReference().child("fotos_subidas");
+        storageReference = FirebaseStorage.getInstance().getReference().child("img_comprimidas");
     }
 
 
@@ -106,6 +120,34 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
                 startActivity(i);
                 break;
             case R.id.boton_crear_aviso:
+
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG,90,byteArrayOutputStream);
+                thumb_byte = byteArrayOutputStream.toByteArray();
+                StorageReference ref = storageReference.child(mCurrentPhotoPath);
+                UploadTask uploadTask = storageReference.putBytes(thumb_byte);
+
+                Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if(!task.isSuccessful()){
+                            throw Objects.requireNonNull(task.getException());
+                        }
+                        return  storageReference.getDownloadUrl();
+
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        Uri downloadUri = task.getResult();
+                        System.out.println("!!!!!!!!!!!!!!!!  IMAGEN CARGADA !!!!!!!!!!!!!!!!!!");
+                        imgref.child("url_photo").setValue(downloadUri.toString());
+                    }
+                });
+
+
+
+
                 this.crearAviso();
                 break;
         }
@@ -122,10 +164,10 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
             public void onClick(DialogInterface dialog, int which) {
                 if (option[which] == "Tomar foto") {
                     openCamera();
-                } else if (option[which] == "Elegir de galeria") {
+                }/* else if (option[which] == "Elegir de galeria") {
                     openGallery();
 
-                } else {
+                } */else {
                     dialog.dismiss();
                 }
             }
@@ -198,11 +240,11 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
     }
 
 
-
+    /*
     private void openGallery(){
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(gallery,100 );
-    }
+    }*/
 
     private File createImageFile() throws IOException {
         // Create an image file name
@@ -232,6 +274,9 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), photoURI);
                 img.setImageBitmap(bitmap);
 
+
+
+
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -248,13 +293,12 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
             }
             img.setImageBitmap(bitmap);
             //comprimiendo imagen
-            /*try {
+            try {
                 File url = new File(photoURI.getPath());
-                Bitmap bitmap;
                 bitmap = new Compressor(this)
                         .setMaxHeight(640)
                         .setMaxWidth(480)
-                        .setQuality(480)
+                        .setQuality(90)
                         .compressToBitmap(url);
 
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -264,7 +308,7 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
 
             } catch (IOException e) {
                 e.printStackTrace();
-            }*/
+            }
 
 
 
@@ -359,6 +403,5 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
 
 
 }
-
 
 

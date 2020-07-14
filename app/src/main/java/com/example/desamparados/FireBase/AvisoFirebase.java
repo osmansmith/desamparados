@@ -41,9 +41,6 @@ public class AvisoFirebase {
         boolean bandera = false;
             try {
                 DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-                final StorageReference storageReference;
-                storageReference = FirebaseStorage.getInstance().getReference().child("aviso_imagenes");
-                UploadTask uploadTask = storageReference.putBytes(thumb_byte);
 
                 aviso.setId(UUID.randomUUID().toString());
                 database.child("avisos").child(aviso.getId()).setValue(aviso);
