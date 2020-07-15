@@ -1,5 +1,6 @@
 package com.example.desamparados;
 
+import android.app.Application;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -26,6 +27,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
     private AppBarConfiguration mAppBarConfiguration;
     private  FloatingActionButton fab;
+    private GoogleSignInClient mGoogleSignInClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         //TOOLBAR
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
 
         //BOTON FLOTANTE
         fab = findViewById(R.id.fab);
@@ -54,10 +60,11 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_singout)
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -92,7 +99,10 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Este menu esta al lado derecho en la barra
-        //getMenuInflater().inflate(R.menu.main, menu);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+        if(account !=  null) {
+            getMenuInflater().inflate(R.menu.main, menu);
+        }
         return true;
     }
 
@@ -126,6 +136,31 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case R.id.sing_out:
+                // your action goes here
+                GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+                if(account !=  null){
+                    GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                            .requestIdToken(getString(R.string.default_web_client_id))
+                            .requestEmail()
+                            .build();
+
+                    mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+                            mGoogleSignInClient.signOut();
+                            Toast.makeText(MainActivity.this,"You are Logged Out",Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(i);
+
+                   Toast.makeText(this,"cerrar sesión",Toast.LENGTH_LONG).show();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 
 
