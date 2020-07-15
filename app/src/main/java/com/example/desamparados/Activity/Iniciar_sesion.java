@@ -44,6 +44,7 @@ public class Iniciar_sesion extends AppCompatActivity {
 
         signInButton = findViewById(R.id.signInButton);
         mAuth = FirebaseAuth.getInstance();
+        btnSignOut = findViewById(R.id.singOutButton);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -59,7 +60,16 @@ public class Iniciar_sesion extends AppCompatActivity {
             }
         });
 
-
+        btnSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mGoogleSignInClient.signOut();
+                Toast.makeText(Iniciar_sesion.this,"You are Logged Out",Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
+                btnSignOut.setVisibility(View.INVISIBLE);
+            }
+        });
     }
 
     private void signIn(){
