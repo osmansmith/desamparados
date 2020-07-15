@@ -112,12 +112,15 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
+
                         <EditText
                             android:id="@+id/nombre"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
                             android:inputType="textPersonName" />
+
+
 
                         <TextView
                             android:layout_width="match_parent"
@@ -194,6 +197,7 @@
                             android:id="@+id/boton_crear_aviso"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="45dp"
                             android:text="Publicar"
                             android:textColor="@color/colorPrimary" />
 

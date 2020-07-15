@@ -64,7 +64,7 @@ public class Iniciar_sesion extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mGoogleSignInClient.signOut();
-                Toast.makeText(Iniciar_sesion.this,"You are Logged Out",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Iniciar_sesion.this,"Has cerrado sesión",Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(i);
                 btnSignOut.setVisibility(View.INVISIBLE);
@@ -90,11 +90,11 @@ public class Iniciar_sesion extends AppCompatActivity {
         try{
 
             GoogleSignInAccount acc = completedTask.getResult(ApiException.class);
-            Toast.makeText(Iniciar_sesion.this,"Signed In Successfully",Toast.LENGTH_SHORT).show();
+            Toast.makeText(Iniciar_sesion.this,"Inicio de sesión exitoso",Toast.LENGTH_SHORT).show();
             FirebaseGoogleAuth(acc);
         }
         catch (ApiException e){
-            Toast.makeText(Iniciar_sesion.this,"Sign In Failed",Toast.LENGTH_SHORT).show();
+            Toast.makeText(Iniciar_sesion.this,"Error al iniciar sesión",Toast.LENGTH_SHORT).show();
             FirebaseGoogleAuth(null);
         }
     }
@@ -133,7 +133,7 @@ public class Iniciar_sesion extends AppCompatActivity {
             String personId = account.getId();
             Uri personPhoto = account.getPhotoUrl();
 
-            Toast.makeText(Iniciar_sesion.this,personName + personEmail ,Toast.LENGTH_SHORT).show();
+            Toast.makeText(Iniciar_sesion.this,personName + " "  + personEmail ,Toast.LENGTH_SHORT).show();
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(i);
         }

@@ -13,6 +13,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -72,7 +73,6 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
     public static EditText direccion;
     Button btn_img;
     Button boton_mapa;
-    DatabaseReference imgref;
     StorageReference storageReference;
 
     public static final int REQUEST_CODE_TAKE_PHOTO = 0 /*1*/;
@@ -103,8 +103,6 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
         llenarSpinnerTipoAviso();
         llenarSpinnerTipoMascota();
 
-        imgref = FirebaseDatabase.getInstance().getReference().child("fotos_subidas");
-        storageReference = FirebaseStorage.getInstance().getReference().child("img_comprimidas");
     }
 
 
@@ -120,12 +118,15 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
                 startActivity(i);
                 break;
             case R.id.boton_crear_aviso:
-
+                if(this.valida()){
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG,90,byteArrayOutputStream);
                 thumb_byte = byteArrayOutputStream.toByteArray();
-                StorageReference ref = storageReference.child(mCurrentPhotoPath);
-                UploadTask uploadTask = storageReference.putBytes(thumb_byte);
+                    storageReference = FirebaseStorage.getInstance().getReference().child("img_comprimidas");
+                    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                    String imageFileName = "JPEG_" + timeStamp + "_";
+                    final StorageReference ref = storageReference.child(timeStamp+imageFileName);
+                    UploadTask uploadTask = ref.putBytes(thumb_byte);
 
                 Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
@@ -133,22 +134,23 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
                         if(!task.isSuccessful()){
                             throw Objects.requireNonNull(task.getException());
                         }
-                        return  storageReference.getDownloadUrl();
+                        return  ref.getDownloadUrl();
 
                     }
                 }).addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
                         Uri downloadUri = task.getResult();
-                        System.out.println("!!!!!!!!!!!!!!!!  IMAGEN CARGADA !!!!!!!!!!!!!!!!!!");
-                        imgref.child("url_photo").setValue(downloadUri.toString());
+                        crearAviso(downloadUri.toString());
+
+                        //imgref.child("url_photo").setValue(downloadUri.toString());
                     }
                 });
 
 
-
-
-                this.crearAviso();
+                }else{
+                    Toast.makeText(this,"Debe completar todos los campos", Toast.LENGTH_LONG).show();
+                }
                 break;
         }
     }
@@ -156,9 +158,9 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
 
 
     private void showOptions() {
-        final CharSequence[] option = {"Tomar foto", "Elegir de galeria", "Cancelar"};
+        final CharSequence[] option = {"Tomar foto", "Cancelar"};
         final AlertDialog.Builder builder = new AlertDialog.Builder(CrearAviso.this);
-        builder.setTitle("Eleige una opción");
+        builder.setTitle("Elige una opción");
         builder.setItems(option, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -269,14 +271,9 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_TAKE_PHOTO && resultCode == RESULT_OK) {
-
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), photoURI);
                 img.setImageBitmap(bitmap);
-
-
-
-
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -304,8 +301,6 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG,90,byteArrayOutputStream);
                 thumb_byte = byteArrayOutputStream.toByteArray();
-
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -373,11 +368,9 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
         f.getTipoMascotas(getApplicationContext(),spinner_tipo_mascota);
     }
 
-    public void crearAviso(){
-        File url = new File(photoURI.getPath());
-
-
+    public void crearAviso(String img){
         Aviso aviso = new Aviso();
+        aviso.setImage_firebase(img);
         aviso.setNombre(this.nombre.getText().toString().trim());
         aviso.setDescripcion(this.descripcion.getText().toString().trim());
         aviso.setLatitud(Double.parseDouble(this.latitud.getText().toString().trim()));
@@ -387,7 +380,7 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
         aviso.setTipoAviso((TipoAviso) spinner_tipo_aviso.getSelectedItem());
         aviso.setTipoMascota((TipoMascota) spinner_tipo_mascota.getSelectedItem());
         AvisoFirebase avisoFirebase = new AvisoFirebase();
-        if(avisoFirebase.insertarAviso(aviso,thumb_byte)){
+        if(avisoFirebase.insertarAviso(aviso)){
             Toast.makeText(this, "Aviso Creado!",Toast.LENGTH_LONG).show();
             Intent i =new Intent(this, MainActivity.class);
             startActivity(i);
@@ -397,6 +390,34 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
             Toast.makeText(this, "Aviso no pudo ser ingresado :c",Toast.LENGTH_LONG).show();
         }
 
+    }
+
+
+    public boolean valida(){
+        Drawable dr = getResources().getDrawable(R.drawable.ic_error);
+        dr.setBounds(0, 0, dr.getIntrinsicWidth(), dr.getIntrinsicHeight());
+
+        //String msg = "Este campo es obligatorio";
+        boolean condition = true;
+        if(nombre.getText().toString().isEmpty()){
+            condition = false;
+        }
+        if(descripcion.getText().toString().isEmpty()){
+            condition = false;
+        }
+        if(direccion.getText().toString().isEmpty()){
+            condition = false;
+        }
+        if(latitud.getText().toString().isEmpty()){
+            condition = false;
+        }
+        if(longitud.getText().toString().isEmpty()){
+            condition = false;
+        }
+        if(bitmap == null){
+            condition = false ;
+        }
+        return condition;
     }
 
 

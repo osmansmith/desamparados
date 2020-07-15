@@ -57,7 +57,6 @@ public class TipoAvisoFirebase {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                         TipoAviso tipo = (TipoAviso) parent.getItemAtPosition(position);
-                        Toast.makeText(parent.getContext(), "Seleccionado" + tipo.getNombre(),Toast.LENGTH_LONG).show();
                     }
                     @Override
                     public void onNothingSelected(AdapterView<?> parent) {

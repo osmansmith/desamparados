@@ -1,7 +1,6 @@
 package com.example.desamparados.FireBase;
 
 import android.content.Context;
-import android.net.Uri;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,20 +11,15 @@ import com.example.desamparados.Clases.Aviso;
 import com.example.desamparados.Clases.TipoAviso;
 import com.example.desamparados.Clases.TipoMascota;
 import com.example.desamparados.R;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
+
 
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.UUID;
 
 public class AvisoFirebase {
@@ -37,11 +31,10 @@ public class AvisoFirebase {
      * @param aviso objeto de la clase Aviso
      * @return boolean bandera, indicando si se insertó el aviso
      */
-    public boolean insertarAviso(final Aviso aviso, byte[] thumb_byte){
+    public boolean insertarAviso(Aviso aviso){
         boolean bandera = false;
             try {
-                DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-
+                final DatabaseReference database = FirebaseDatabase.getInstance().getReference();
                 aviso.setId(UUID.randomUUID().toString());
                 database.child("avisos").child(aviso.getId()).setValue(aviso);
                 bandera = true;
@@ -67,6 +60,7 @@ public class AvisoFirebase {
                     aviso.setNombre(ds.child("nombre").getValue().toString());
                     aviso.setDescripcion(ds.child("descripcion").getValue().toString());
                     aviso.setImagen(R.drawable.gato);
+                    aviso.setImage_firebase(ds.child("image_firebase").getValue().toString());
                     aviso.setLatitud(Double.parseDouble(ds.child("latitud").getValue().toString()));
                     aviso.setLongitud(Double.parseDouble(ds.child("longitud").getValue().toString()));
                     aviso.setEstado(Integer.parseInt(ds.child("estado").getValue().toString()));
@@ -93,27 +87,3 @@ public class AvisoFirebase {
 
 
 }
-
-
-/*
-
-                Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                    @Override
-                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                        if(!task.isSuccessful()){
-                            throw Objects.requireNonNull(task.getException());
-                        }
-                        return  storageReference.getDownloadUrl();
-
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        Uri downloadUri = task.getResult();
-                        System.out.println("!!!!!!!!!!!!!!!!  IMAGEN CARGADA !!!!!!!!!!!!!!!!!!");
-                        aviso.setImage_firebase(downloadUri.toString());
-                    }
-                });
-
-
- */

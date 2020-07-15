@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home, R.id.nav_gallery)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -150,11 +150,10 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
                     mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
                             mGoogleSignInClient.signOut();
-                            Toast.makeText(MainActivity.this,"You are Logged Out",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this,"Has cerrado sesión",Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(i);
 
-                   Toast.makeText(this,"cerrar sesión",Toast.LENGTH_LONG).show();
                 }
                 return true;
             default:
