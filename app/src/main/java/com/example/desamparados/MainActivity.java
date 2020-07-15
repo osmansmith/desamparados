@@ -1,17 +1,29 @@
 package com.example.desamparados;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.desamparados.Activity.CrearAviso;
 
 
+import com.example.desamparados.Activity.Iniciar_sesion;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
 
 
 import androidx.navigation.NavController;
@@ -45,12 +57,36 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_singout)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
+        View headerView = navigationView.getHeaderView(0);
+
+        TextView navUsername = (TextView) headerView.findViewById(R.id.userName);
+        TextView navUserEmail = (TextView) headerView.findViewById(R.id.userEmail);
+        ImageView navUserImage = (ImageView) headerView.findViewById(R.id.userImage);
+
+
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+        if(account !=  null) {
+            navUsername.setText(account.getDisplayName());
+            navUserEmail.setText(account.getEmail());
+            Picasso.get().load(account.getPhotoUrl()).into(navUserImage);
+        }
+
+
+
+
+
+
+
+
+
     }
 
     @Override
@@ -69,9 +105,15 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
     //ABRIR EL ACTIVITY PARA CREAR UNA NUEVA PUBLICACION
     public void CrearAviso(View v){
-        Intent i =new Intent(this, CrearAviso.class);
-        startActivity(i);
-
+        //Intent i =new Intent(this, CrearAviso.class);
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+        if(account !=  null) {
+            Intent i =new Intent(this, CrearAviso.class);
+            startActivity(i);
+        }else {
+            Intent i = new Intent(this, Iniciar_sesion.class);
+            startActivity(i);
+        }
 
 }
 
@@ -83,5 +125,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
             CrearAviso(v);
         }
     }
+
+
+
 
 }

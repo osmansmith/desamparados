@@ -19,7 +19,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activity.Iniciar_sesion"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/Theme.Design.NoActionBar"
+            >
         </activity>
         <activity
             android:name=".Activity.Registrar"
