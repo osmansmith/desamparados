@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.desamparados.Adaptador.AdaptadorTiendas;
 import com.example.desamparados.Clases.Tiendas;
+import com.example.desamparados.FireBase.AvisoFirebase;
+import com.example.desamparados.FireBase.TiendaFirebase;
 import com.example.desamparados.R;
 
 import java.util.ArrayList;
@@ -31,26 +33,13 @@ public class GalleryFragment extends Fragment {
         View vista=inflater.inflate(R.layout.fragment_gallery, container,false);
 
         recyclerView=(RecyclerView) vista.findViewById(R.id.recyclerview);
-        listaTiendas=new ArrayList<>();
-
-        AñadirDatos();
-        MostraLista();
+        MostraLista();//muestra la lista
         return vista;
 
     }
 
-    public void AñadirDatos(){
-        listaTiendas.add(new Tiendas("PetHappy","Veterinaria y petshop",
-                R.drawable.floridaop ));
-        listaTiendas.add(new Tiendas("mascogar","Todo para mascotas",
-                R.drawable.mascogar));
-    }
     public void MostraLista(){
-
-        LinearLayoutManager layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL, false);
-
-        adaptadorTiendas =new AdaptadorTiendas(getContext(),listaTiendas);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adaptadorTiendas);
+        TiendaFirebase tiendaFirebase = new TiendaFirebase();
+        tiendaFirebase.getTiendas(getContext(),recyclerView);
     }
 }

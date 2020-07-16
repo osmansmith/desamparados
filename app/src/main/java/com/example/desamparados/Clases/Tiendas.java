@@ -4,14 +4,18 @@ package com.example.desamparados.Clases;
 public class Tiendas {
 
     //VARIABLES DE UNA EMPRESA YA SEA VETERINARIA O UN PETSHOP
+    private int id;
     private String nombre,descripcion;
-    private String latitud;
-    private String longitud;
+    private Double latitud;
+    private Double longitud;
     private String direccion;
     private String imagen_firebase;
     private int imagen, tipo;//ES DE TIPO ENTERO POR QUE SE LE SACA EL ID QUE RESIBE EN LA CARPETA DRAWABLE
 
-    public Tiendas(String nombre,String descripcion,int imagen){
+    public Tiendas() {
+    }
+
+    public Tiendas(String nombre, String descripcion, int imagen){
         this.nombre=nombre;
         this.descripcion=descripcion;
         this.imagen=imagen;
@@ -52,19 +56,27 @@ public class Tiendas {
         this.imagen_firebase = imagen_firebase;
     }
 
-    public String getLatitud() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Double getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(String latitud) {
+    public void setLatitud(Double latitud) {
         this.latitud = latitud;
     }
 
-    public String getLongitud() {
+    public Double getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(String longitud) {
+    public void setLongitud(Double longitud) {
         this.longitud = longitud;
     }
 
