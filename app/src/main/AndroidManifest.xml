@@ -18,14 +18,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".Activity.DetalleTiendas"
+            android:theme="@style/Theme.Design.NoActionBar"></activity>
+        <activity
+            android:name=".Activity.DetalleAvisos"
+            android:theme="@style/Theme.Design.NoActionBar"></activity>
+        <activity
             android:name=".Activity.Iniciar_sesion"
-            android:theme="@style/Theme.Design.NoActionBar"
-            >
-        </activity>
+            android:theme="@style/Theme.Design.NoActionBar"></activity>
         <activity
             android:name=".Activity.Registrar"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

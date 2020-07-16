@@ -1,29 +1,23 @@
-package com.example.desamparados.ui.slideshow;
+package com.example.desamparados.ui.ad;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.desamparados.R;
 
-public class SlideshowFragment extends Fragment {
+public class FragmentAvisos extends Fragment {
 
-
-
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View vista=inflater.inflate(R.layout.fragment_slideshow, container,false);
-
+        View vista=inflater.inflate(R.layout.fragment_avisos, container,false);
 
         return vista;
 
