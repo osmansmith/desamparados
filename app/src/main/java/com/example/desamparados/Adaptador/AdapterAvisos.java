@@ -4,14 +4,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 ;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.example.desamparados.Activity.DetalleAvisos;
 import com.example.desamparados.Clases.Aviso;
 import com.example.desamparados.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,10 +38,13 @@ public class AdapterAvisos extends RecyclerView.Adapter<AdapterAvisos.ViewHolder
 
     private ArrayList<Aviso> listaAvisos;
     private View.OnClickListener click;
+    private Context context;
 
 
     public AdapterAvisos(Context context, ArrayList<Aviso> listaAvisos) {
         this.listaAvisos = listaAvisos;
+        this.context = context;
+
     }
 
     @Override
@@ -52,10 +59,32 @@ public class AdapterAvisos extends RecyclerView.Adapter<AdapterAvisos.ViewHolder
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         //HACE CONExION ENTRE EL ADAPTADOR Y LA CLASE ViewHolder()
-
+        final Aviso aviso  = listaAvisos.get(position);
         holder.nombre.setText(listaAvisos.get(position).getNombre());
         holder.Descripcion.setText(listaAvisos.get(position).getDescripcion());
         Picasso.get().load(listaAvisos.get(position).getImage_firebase()).into(holder.imagen);
+
+
+        holder.layout.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, DetalleAvisos.class);
+                i.putExtra("nombre", aviso.getNombre());
+                i.putExtra("descripcion", aviso.getDescripcion());
+                i.putExtra("imagen_firebase", aviso.getImage_firebase());
+                i.putExtra("direccion", aviso.getDireccion());
+                i.putExtra("estado", String.valueOf(aviso.getEstado()));
+                i.putExtra("tipo_aviso", aviso.getTipoAviso().getNombre());
+                i.putExtra("tipo_mascota", aviso.getTipoMascota().getNombre());
+
+
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(i);
+            }
+
+        });
+
     }
 
     @Override
@@ -74,16 +103,23 @@ public class AdapterAvisos extends RecyclerView.Adapter<AdapterAvisos.ViewHolder
         }
     }
 
+
+
+
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         //HACE REFERENCIA A LO UTILIZADO EN EL LAYOUT
         ImageView imagen;
         TextView nombre, Descripcion;
+        LinearLayout layout;
 
         public ViewHolder(View view) {
             super(view);
             imagen = (ImageView) itemView.findViewById(R.id.imageView6);
             nombre = (TextView) itemView.findViewById(R.id.nombre);
             Descripcion = (TextView) itemView.findViewById(R.id.descripcion);
+
+            layout = itemView.findViewById(R.id.layout);
         }
 
     }

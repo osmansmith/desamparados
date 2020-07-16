@@ -7,7 +7,7 @@
     tools:context=".Activity.DetalleAvisos">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imagen"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_marginStart="20dp"
@@ -17,10 +17,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+        app:layout_constraintTop_toBottomOf="@+id/estado" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/nombre"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginStart="20dp"
@@ -34,27 +34,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imagen" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/direccion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="sans-serif"
-        android:text="ubicacion"
+        android:text="Dirección"
         android:textColor="#0A4B83"
         android:textSize="16sp"
         android:textColorHint="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/nombre" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/descripcion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -68,20 +68,57 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/direccion" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/estado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="sans-serif"
         android:text="Estado"
         android:textColor="#0A4B83"
         android:textSize="20sp"
-        android:fontFamily="sans-serif"
+        app:layout_constraintBottom_toTopOf="@+id/imagen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tipoMascota"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="sans-serif"
+        android:text="tipo de mascota"
+        android:textColor="#0A4B83"
+        android:textColorHint="@color/colorAccent"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descripcion" />
+
+    <TextView
+        android:id="@+id/tipoAviso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="sans-serif"
+        android:text="tipo de aviso"
+        android:textColor="#0A4B83"
+        android:textColorHint="@color/colorAccent"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tipoMascota" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -59,6 +59,7 @@ public class AvisoFirebase {
                     aviso.setId(ds.getKey());
                     aviso.setNombre(ds.child("nombre").getValue().toString());
                     aviso.setDescripcion(ds.child("descripcion").getValue().toString());
+                    aviso.setDireccion(ds.child("direccion").getValue().toString());
                     aviso.setImagen(R.drawable.gato);
                     aviso.setImage_firebase(ds.child("image_firebase").getValue().toString());
                     aviso.setLatitud(Double.parseDouble(ds.child("latitud").getValue().toString()));
@@ -75,6 +76,10 @@ public class AvisoFirebase {
                 adaptadorAviso =new AdapterAvisos(context,avisos);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adaptadorAviso);
+
+
+
+
 
             }
             @Override

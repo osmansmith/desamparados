@@ -1,6 +1,8 @@
 package com.example.desamparados.Clases;
 
-public class Aviso {
+import java.io.Serializable;
+
+public class Aviso implements Serializable {
 
     //FALTA AGREGAR VARIABLES
     private String id;//string porque desde firebase se crea un id de tipo string
