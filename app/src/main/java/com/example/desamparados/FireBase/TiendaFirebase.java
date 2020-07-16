@@ -6,13 +6,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.desamparados.Adaptador.AdaptadorTiendas;
-import com.example.desamparados.Adaptador.AdapterAvisos;
-import com.example.desamparados.Clases.Aviso;
+import com.example.desamparados.Clases.LoadingDialog;
 import com.example.desamparados.Clases.Tiendas;
-import com.example.desamparados.Clases.TipoAviso;
-import com.example.desamparados.Clases.TipoMascota;
+
 import com.example.desamparados.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,7 +18,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class TiendaFirebase {
 
@@ -33,8 +29,10 @@ public class TiendaFirebase {
      * @param context contexto de la actividad o fragment en la que se cargará la información
      * @param recyclerView recycler view en donde se cargarán los datos
      */
-    public void getTiendas(final Context context, final RecyclerView recyclerView){
+    public void getTiendas(final Context context, final RecyclerView recyclerView, final LoadingDialog loadingDialog){
         final ArrayList<Tiendas> tiendas = new ArrayList<Tiendas>();
+        loadingDialog.startLoadingDialog("tiendas");
+
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         database.child("tiendas").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -57,9 +55,7 @@ public class TiendaFirebase {
                 adaptadorTienda =new AdaptadorTiendas(context,tiendas);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adaptadorTienda);
-
-
-
+                loadingDialog.dismissDialog();
 
 
             }
@@ -69,6 +65,7 @@ public class TiendaFirebase {
 
             }
         });
+
     }
 
 

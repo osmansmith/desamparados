@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.desamparados.Adaptador.AdaptadorTiendas;
+import com.example.desamparados.Clases.LoadingDialog;
 import com.example.desamparados.Clases.Tiendas;
 import com.example.desamparados.FireBase.AvisoFirebase;
 import com.example.desamparados.FireBase.TiendaFirebase;
@@ -31,15 +32,17 @@ public class GalleryFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View vista=inflater.inflate(R.layout.fragment_gallery, container,false);
-
+        //layout = (LinearLayout) vista.findViewById(R.id.layout_progress);
         recyclerView=(RecyclerView) vista.findViewById(R.id.recyclerview);
-        MostraLista();//muestra la lista
+        LoadingDialog loadingDialog = new LoadingDialog(this.getActivity());
+        MostraLista(loadingDialog);
         return vista;
+
 
     }
 
-    public void MostraLista(){
+    public void MostraLista(LoadingDialog loadingDialog){
         TiendaFirebase tiendaFirebase = new TiendaFirebase();
-        tiendaFirebase.getTiendas(getContext(),recyclerView);
+        tiendaFirebase.getTiendas(getContext(),recyclerView,loadingDialog);
     }
 }

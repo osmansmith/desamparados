@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -80,6 +81,8 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
     public String mCurrentPhotoPath;
     Bitmap bitmap;
     byte[] thumb_byte = null;
+    ProgressDialog progress;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +122,9 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.boton_crear_aviso:
                 if(this.valida()){
+
+                    progress = ProgressDialog.show(this, "Cargando",
+                            "Espere por favor", true);
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG,90,byteArrayOutputStream);
                 thumb_byte = byteArrayOutputStream.toByteArray();
@@ -142,7 +148,7 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
                     public void onComplete(@NonNull Task<Uri> task) {
                         Uri downloadUri = task.getResult();
                         crearAviso(downloadUri.toString());
-
+                        progress.dismiss();
                         //imgref.child("url_photo").setValue(downloadUri.toString());
                     }
                 });

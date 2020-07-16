@@ -56,6 +56,8 @@ dependencies {
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.4.4'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'id.zelory:compressor:2.1.0'
+    implementation "com.airbnb.android:lottie:3.4.1"
+
 
 
 

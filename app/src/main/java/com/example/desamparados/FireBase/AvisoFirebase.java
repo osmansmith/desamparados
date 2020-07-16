@@ -1,5 +1,6 @@
 package com.example.desamparados.FireBase;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.desamparados.Adaptador.AdapterAvisos;
 import com.example.desamparados.Clases.Aviso;
+import com.example.desamparados.Clases.LoadingDialog;
 import com.example.desamparados.Clases.TipoAviso;
 import com.example.desamparados.Clases.TipoMascota;
 import com.example.desamparados.R;
@@ -48,7 +50,11 @@ public class AvisoFirebase {
      * @param context contexto de la actividad o fragment en la que se cargará la información
      * @param recyclerView recycler view en donde se cargarán los datos
      */
-    public void getAvisos(final Context context, final RecyclerView recyclerView){
+    public boolean getAvisos(final Context context, final RecyclerView recyclerView, final LoadingDialog loadingDialog){
+        /*final ProgressDialog progress;
+        progress = ProgressDialog.show(context, "Cargando",
+                "Espere por favor", true);*/
+        loadingDialog.startLoadingDialog("avisos");
         final ArrayList<Aviso> avisos = new ArrayList<Aviso>();
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         database.child("avisos").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -76,7 +82,7 @@ public class AvisoFirebase {
                 adaptadorAviso =new AdapterAvisos(context,avisos);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(adaptadorAviso);
-
+                loadingDialog.dismissDialog();
 
 
 
@@ -88,6 +94,7 @@ public class AvisoFirebase {
 
             }
         });
+        return true;
     }
 
 
