@@ -304,13 +304,13 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
                         .setQuality(90)
                         .compressToBitmap(url);
 
-                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG,90,byteArrayOutputStream);
-                thumb_byte = byteArrayOutputStream.toByteArray();
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG,90,byteArrayOutputStream);
+            thumb_byte = byteArrayOutputStream.toByteArray();
 
 
 
@@ -342,7 +342,7 @@ public class CrearAviso extends AppCompatActivity implements View.OnClickListene
                     bitmap = new Compressor(this)
                             .setMaxHeight(640)
                             .setMaxWidth(480)
-                            .setQuality(480)
+                            .setQuality(90)
                             .compressToBitmap(url);
 
                 } catch (IOException e) {
