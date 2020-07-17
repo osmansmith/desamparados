@@ -78,7 +78,7 @@ public class AdaptadorTiendas extends RecyclerView.Adapter<AdaptadorTiendas.View
             imagen = (ImageView) itemView.findViewById(R.id.imageView6);
             nombre = (TextView) itemView.findViewById(R.id.nombre);
             Descripcion = (TextView) itemView.findViewById(R.id.descripcion);
-            layout = itemView.findViewById(R.id.layout);
+            layout = itemView.findViewById(R.id.layout_tiendas);
 
         }
 

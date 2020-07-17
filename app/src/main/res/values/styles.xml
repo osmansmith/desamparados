@@ -11,6 +11,7 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -22,6 +23,12 @@
         <item name="android:colorAccent">#B62121</item>
         <item name="android:textColor">#000000</item>
         <item name="android:textColorPrimary">#2196F3</item>
+    </style>
+
+    <style name="splash" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimaryDark">#025d8a</item>
     </style>
 
 </resources>

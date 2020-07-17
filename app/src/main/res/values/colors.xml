@@ -4,6 +4,8 @@
     <color name="colorPrimaryDark">#1976d2</color>
     <color name="colorAccent">#FFC107</color>
     <color name="letra">#FDFBFB</color>
-
+    <color name="colorSoftGray">#e2e3e3</color>
+    <!-- Favorite icon Star color-->
+    <color name="favorito_color">#D51B1B</color>
 </resources>
    <!--  #FFA726  -->
