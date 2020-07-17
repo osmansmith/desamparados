@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.desamparados.Activity.DetalleAvisos;
@@ -34,7 +35,7 @@ public class AdaptadorTiendas extends RecyclerView.Adapter<AdaptadorTiendas.View
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_avisos,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_tiendas,parent,false);
       return  new ViewHolder(view);
     }
 
@@ -71,14 +72,14 @@ public class AdaptadorTiendas extends RecyclerView.Adapter<AdaptadorTiendas.View
         //HACE REFERENCIA A LO UTILIZADO EN EL LAYOUT LIST_AVISO
         ImageView imagen;
         TextView nombre, Descripcion;
-        LinearLayout layout;
+        RelativeLayout layout;
 
         public ViewHolder(View view) {
             super(view);
-            imagen = (ImageView) itemView.findViewById(R.id.imageView6);
+            imagen = (ImageView) itemView.findViewById(R.id.imagen);
             nombre = (TextView) itemView.findViewById(R.id.nombre);
             Descripcion = (TextView) itemView.findViewById(R.id.descripcion);
-            layout = itemView.findViewById(R.id.layout_tiendas);
+            layout = (RelativeLayout) itemView.findViewById(R.id.layout);
 
         }
 

@@ -23,7 +23,6 @@ import com.example.desamparados.R;
 
 public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
-    public LinearLayout layout;
     AlertDialog dialog;
 
 

@@ -35,7 +35,7 @@ public class GalleryFragment extends Fragment {
 
         View vista=inflater.inflate(R.layout.fragment_gallery, container,false);
         //layout = (LinearLayout) vista.findViewById(R.id.layout_progress);
-        recyclerView=(RecyclerView) vista.findViewById(R.id.recyclerview);
+        recyclerView=(RecyclerView) vista.findViewById(R.id.recyclerview_tienda);
         return vista;
 
 
