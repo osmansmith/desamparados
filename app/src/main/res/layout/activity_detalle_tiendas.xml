@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     tools:context=".Activity.DetalleTiendas">
 
     <ImageView
@@ -16,6 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:outlineSpotShadowColor="@color/colorAccent"
         app:srcCompat="@drawable/ic_launcher_addphoto" />
 
     <TextView

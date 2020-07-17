@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.desamparados">
+    package="com.Desampara2.desamparados">
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activity.Splash"
+            android:name="com.Desampara2.desamparados.Activity.Splash"
             android:theme="@style/splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,16 +27,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.DetalleTiendas"
+            android:name="com.Desampara2.desamparados.Activity.DetalleTiendas"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity
-            android:name=".Activity.DetalleAvisos"
+            android:name="com.Desampara2.desamparados.Activity.DetalleAvisos"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity
-            android:name=".Activity.Iniciar_sesion"
+            android:name="com.Desampara2.desamparados.Activity.Iniciar_sesion"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity
-            android:name=".Activity.Registrar"
+            android:name="com.Desampara2.desamparados.Activity.Registrar"
             android:theme="@style/AppTheme.NoActionBar" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -51,17 +51,17 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name="com.Desampara2.desamparados.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".Activity.CrearAviso"
+            android:name="com.Desampara2.desamparados.Activity.CrearAviso"
             android:exported="true"
             android:label="@string/app_name">
 
             <!-- ESTO ES PARA QUE NO APARESCA EL NOMBRE DE LA APP -->
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.Desampara2.desamparados.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
 
